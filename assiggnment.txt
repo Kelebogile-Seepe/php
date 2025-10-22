@@ -1,0 +1,38 @@
+  accountnumber = input("Enter account number: ")
+    accounttype = input("Enter account type ('s' for savings, 'c' for checking): ").lower()
+    minimumbalance = float(input("Enter the minimum required balance: "))
+    currentbalance = float(input("Enter the current balance: "))
+
+    print("\n--- Account Summary ---")
+    print(f"Account Number: {accountnumber}")
+
+    if accounttype == 's':
+        print("Account Type: Savings")
+        if currentbalance < minimumbalance:
+            currentbalance -= 10.00
+            print("Service Charge Applied: $10.00 (Balance below minimum)")
+        else:
+            interest = currentbalance * 0.04
+            currentbalance += interest
+            print(f"Interest Applied: 4% (${interest:.2f})")
+
+    elif accounttype == 'c':
+        print("Account Type: Checking")
+        if currentbalance < minimumbalance:
+            currentbalance -= 25.00
+            print("Service Charge Applied: $25.00 (Balance below minimum)")
+        else:
+            excessbalance = currentbalance - minimumbalance
+            if excessbalance <= 5000:
+                interest = currentbalance * 0.03
+                print(f"Interest Applied: 3% (${interest:.2f})")
+            else:
+                interest = currentbalance * 0.05
+                print(f"Interest Applied: 5% (${interest:.2f})")
+            currentbalance += interest
+    else:
+        print("Invalid account type entered.")
+        return
+
+    print(f"Final Balance: ${currentbalance:.2f}")
+    print("-------------------------")
